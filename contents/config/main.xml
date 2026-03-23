@@ -18,6 +18,10 @@
       <label>Sizing, cropping and positioning of the wallpaper image</label>
       <default>0</default>
     </entry>
+    <entry name="ParallaxEnabled" type="Bool">
+      <label>Enable overlay parallax on mouse movement</label>
+      <default>false</default>
+    </entry>
   </group>
 
   <group name="Rain">

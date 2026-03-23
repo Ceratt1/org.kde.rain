@@ -47,7 +47,8 @@ WallpaperItem {
             readonly property real visualHeight: preserveAspectFit ? (sourceAspect > targetAspect ? overlayRoot.width / sourceAspect : overlayRoot.height) : overlayRoot.height
             readonly property real hoverWidth: overlayRoot.width
             readonly property real hoverHeight: overlayRoot.height
-            property bool hovered: overlayMouseArea.containsMouse
+            readonly property bool enabled: wallpaper.configuration.ParallaxEnabled
+            property bool hovered: enabled && overlayMouseArea.containsMouse
             property real pointerX: hoverWidth / 2
             property real pointerY: hoverHeight / 2
             readonly property real normalizedX: normalize(pointerX, hoverWidth)
@@ -73,6 +74,12 @@ WallpaperItem {
             function resetPointer() {
                 pointerX = hoverWidth / 2
                 pointerY = hoverHeight / 2
+            }
+
+            onEnabledChanged: {
+                if (!enabled) {
+                    resetPointer()
+                }
             }
         }
 
@@ -159,7 +166,8 @@ WallpaperItem {
             MouseArea {
                 id: overlayMouseArea
                 anchors.fill: parent
-                hoverEnabled: true
+                enabled: overlayEffect.enabled
+                hoverEnabled: overlayEffect.enabled
                 acceptedButtons: Qt.NoButton
 
                 onPositionChanged: {

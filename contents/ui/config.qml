@@ -17,6 +17,7 @@ Kirigami.FormLayout {
     property string cfg_Image
     property string cfg_OverlayImage
     property int cfg_FillMode
+    property bool cfg_ParallaxEnabled
 
     // Rainflake properties
     property string cfg_Rainflake
@@ -119,6 +120,15 @@ Kirigami.FormLayout {
         valueRole: "fillMode"
         Component.onCompleted: currentIndex = indexOfValue(cfg_FillMode)
         onActivated: cfg_FillMode = currentValue
+    }
+
+    QQC2.Switch {
+        Kirigami.FormData.label: i18nd("plasma_applet_org.kde.rain", "Mouse parallax:")
+        checked: cfg_ParallaxEnabled
+        text: checked
+            ? i18nd("plasma_applet_org.kde.rain", "Activated")
+            : i18nd("plasma_applet_org.kde.rain", "Disabled")
+        onToggled: cfg_ParallaxEnabled = checked
     }
 
     Kirigami.Separator {
